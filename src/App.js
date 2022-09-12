@@ -1,11 +1,9 @@
 
-import './App.css';
+import { TrafficLight } from "./TrafficLight";
 
 function App() {
   return (
-    <div className="App">
-      hello
-    </div>
+    <TrafficLight/>
   );
 }
 
