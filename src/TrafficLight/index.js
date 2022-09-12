@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react"
 
 import * as Styled from "./styled"
 
-let INITIALINTERVAL = 1000
+let delay = 1000
 const countdown = 7
 
 export const TrafficLight = () => {
@@ -17,7 +17,7 @@ export const TrafficLight = () => {
   useEffect(() => {
     console.log("Set Effect")
     if (startTime > 0) {
-      setTimeout(timeOutCallback, INITIALINTERVAL)
+      setTimeout(timeOutCallback, delay)
     }
   }, [startTime, timeOutCallback])
 
