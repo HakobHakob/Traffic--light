@@ -10,10 +10,14 @@ export const TrafficLight = () => {
 
   useEffect(() => {
     if (startTime === 0) {
-      setTimeout(() => {
+      const initialStatesId = setTimeout(() => {
         setIsStarted(false)
         setStartTime(7)
       }, INITIALINTERVAL)
+
+      return () => {
+        clearTimeout(initialStatesId)
+      }
     }
     if (isStarted === true && startTime !== 0) {
       const timerId = setTimeout(() => {
