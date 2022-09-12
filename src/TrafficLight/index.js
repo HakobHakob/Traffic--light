@@ -16,10 +16,10 @@ export const TrafficLight = () => {
 
   useEffect(() => {
     console.log("Set Effect")
-    startTime > 0 && setTimeout(timeOutCallback, INITIALINTERVAL)
+    if (startTime > 0) {
+      setTimeout(timeOutCallback, INITIALINTERVAL)
+    }
   }, [startTime, timeOutCallback])
-
- 
 
   return (
     <Styled.MainDiv>
