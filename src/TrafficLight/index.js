@@ -1,45 +1,45 @@
-import React, { useEffect, useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 
 import * as Styled from "./styled"
 
 let INITIALINTERVAL = 1000
+const countdown = 7
 
 export const TrafficLight = () => {
-  const [startTime, setStartTime] = useState(7)
-  const [isStarted, setIsStarted] = useState(false)
+  const [startTime, setStartTime] = useState()
+  const [otherState, setOtherState] = useState(0)
+
+  const timeOutCallback = useCallback(
+    () => setStartTime((currentTime) => currentTime - 1),
+    []
+  )
 
   useEffect(() => {
-    if (startTime === 0) {
-      const initialStatesId = setTimeout(() => {
-        setIsStarted(false)
-        setStartTime(7)
-      }, INITIALINTERVAL)
+    console.log("Set Effect")
+    startTime > 0 && setTimeout(timeOutCallback, INITIALINTERVAL)
+  }, [startTime, timeOutCallback])
 
-      return () => {
-        clearTimeout(initialStatesId)
-      }
-    }
-    if (isStarted === true && startTime !== 0) {
-      const timerId = setTimeout(() => {
-        setStartTime(startTime - 1)
-      }, INITIALINTERVAL)
-
-      return () => {
-        clearTimeout(timerId)
-      }
-    }
-  })
+ 
 
   return (
     <Styled.MainDiv>
       <Styled.LightsDiv>
-        <Styled.Red isStarted={isStarted} />
-        <Styled.Green isStarted={isStarted}>
-          {startTime === 7 ? "" : startTime}
+        <Styled.Red startTime={startTime} />
+        <Styled.Green startTime={startTime}>
+          {startTime === null || startTime === 0 ? "" : startTime}
         </Styled.Green>
       </Styled.LightsDiv>
 
-      <Styled.Button onClick={() => setIsStarted(true)}>Start</Styled.Button>
+      <Styled.Button
+        onClick={() => (startTime > 0 ? null : setStartTime(countdown))}
+      >
+        Start
+      </Styled.Button>
+      <Styled.Button
+        onClick={() => setOtherState((otherState) => otherState + 1)}
+      >
+        MStart {otherState}
+      </Styled.Button>
     </Styled.MainDiv>
   )
 }

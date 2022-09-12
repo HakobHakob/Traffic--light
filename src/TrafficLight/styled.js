@@ -28,12 +28,12 @@ export const Light = styled.div`
 `
 
 export const Red = styled(Light)`
-  background-color: ${({ isStarted }) =>
-    isStarted === false ? "red" : "transparent"};
+  background-color: ${({ startTime }) =>
+    startTime === undefined || startTime === 0 ? "red" : "transparent"};
 `
 export const Green = styled(Light)`
-  background-color: ${({ isStarted }) =>
-    isStarted === true ? "green" : "transparent"};
+  background-color: ${({ startTime }) =>
+    startTime > 0 ?   "green" : "transparent"};
   font-size: 30px;
 `
 
